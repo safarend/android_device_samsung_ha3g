@@ -207,6 +207,7 @@ static int set_light_leds(const struct light_state_t *state, int type)
     struct led_config led;
     unsigned int colorRGB;
 
+    colorRGB = (colorRGB & 0x00FFFFFF) | 0xFF000000;
     colorRGB = get_dimmed_color(state, 200);
 
     switch (state->flashMode) {
@@ -248,6 +249,7 @@ static int set_light_battery(struct light_device_t *dev,
     int brightness = rgb_to_brightness(state);
     unsigned int colorRGB;
 
+    colorRGB = (colorRGB & 0x00FFFFFF) | 0xFF000000;
     colorRGB = get_dimmed_color(state, 20);
 
     if (brightness == 0) {
