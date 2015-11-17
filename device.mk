@@ -32,7 +32,9 @@ PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.r_submix.default \
     audio.usb.default \
-    libtinyxml
+    libtinyxml \
+    libtinyalsa \
+    tinymix
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf \
@@ -119,7 +121,12 @@ TARGET_SCREEN_WIDTH := 1080
 PRODUCT_PACKAGES += \
     libhwjpeg \
     camera.universal5420
+    
+# Charger
+PRODUCT_PACKAGES += \
+    charger_res_images
 
+    
 # Camera permissions
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/init.exynos.cam.sh:system/etc/init.exynos.cam.sh
@@ -192,7 +199,6 @@ PRODUCT_COPY_FILES += \
 
 # Media profile
 PRODUCT_COPY_FILES += \
-    frameworks/av/media/libstagefright/data/media_codecs_ffmpeg.xml:system/etc/media_codecs_ffmpeg.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml  \
@@ -205,10 +211,6 @@ PRODUCT_PACKAGES += \
 
 # MobiCore setup
 PRODUCT_PACKAGES += \
-    libMcClient \
-    libMcRegistry \
-    libPaApi \
-    libgdmcprov \
     mcDriverDaemon
 
 # Network tools
@@ -219,14 +221,10 @@ PRODUCT_PACKAGES += \
 
 # OMX
 PRODUCT_PACKAGES += \
+    libcsc \
     libExynosOMX_Core \
-    libOMX.Exynos.MPEG4.Decoder \
-    libOMX.Exynos.AVC.Decoder \
-    libOMX.Exynos.MPEG4.Encoder \
-    libOMX.Exynos.AVC.Encoder \
-    libOMX.Exynos.VP8.Decoder \
-    libOMX.Exynos.VP8.Encoder \
-    libstagefrighthw
+    libOMX.Exynos.MP3.Decoder \
+    libstagefrighthw \
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -285,12 +283,9 @@ PRODUCT_PACKAGES += \
     init.recovery.universal5420.rc
 
 # Sensors
-PRODUCT_PACKAGES += \
-    sensors.universal5420
+# PRODUCT_PACKAGES += \
+#    sensors.universal5420
 
-# Torch
-PRODUCT_PACKAGES += \
-    Torch
 # Wifi
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
@@ -306,9 +301,6 @@ PRODUCT_PACKAGES += \
     libnetcmdiface \
     macloader
 
-# for off charging mode
-PRODUCT_PACKAGES += \
-    charger_res_images
 
 # $(call inherit-product, build/target/product/full.mk)
 

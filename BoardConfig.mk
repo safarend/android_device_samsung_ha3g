@@ -34,8 +34,7 @@ TARGET_CPU_VARIANT := cortex-a15
 #BOARD_HAVE_SAMSUNG_AUDIO := true
 #BOARD_USES_ALSA_AUDIO := true
 #BOARD_USES_LIBMEDIA_WITH_AUDIOPARAMETER := true
-HAVE_HTC_AUDIO_DRIVER := true
-BOARD_USES_GENERIC_AUDIO := true
+
 
 # Bionic Tuning
 TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
@@ -45,6 +44,11 @@ BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUEDROID_VENDOR_CONF := $(LOCAL_PATH)/bluetooth/libbt_vndcfg.txt
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
+
+# Boot animation
+TARGET_BOOTANIMATION_PRELOAD := true
+TARGET_BOOTANIMATION_TEXTURE_CACHE := true
+TARGET_BOOTANIMATION_HALF_RES := true
 
 # Bootloader
 TARGET_OTA_ASSERT_DEVICE := ha3g
@@ -60,16 +64,13 @@ COMMON_GLOBAL_CFLAGS += -DSAMSUNG_DVFS
 # Force the screenshot path to CPU consumer (fix glitches)
 COMMON_GLOBAL_CFLAGS += -DFORCE_SCREENSHOT_CPU_PATH
 
-# HEALTH DAEMON (CHARGER) DEFINES
-RED_LED_PATH := "/sys/devices/virtual/sec/led/led_r"
-GREEN_LED_PATH := "/sys/devices/virtual/led/led_g"
-BLUE_LED_PATH := "/sys/devices/virtual/led/led_b"
-BACKLIGHT_PATH := "/sys/class/backlight/panel/brightness"
+# Fonts
+EXTENDED_FONT_FOOTPRINT := true
+
 
 # Kernel
-TARGET_KERNEL_SOURCE := kernel/samsung/exynos5420
+TARGET_KERNEL_SOURCE := kernel/samsung/ha3g
 TARGET_KERNEL_CONFIG := cm_ha3g_defconfig
-# TARGET_KERNEL_CONFIG := SueMax_01_defconfig
 #TARGET_KERNEL_SELINUX_CONFIG := selinux_defconfig
 #BOARD_KERNEL_CMDLINE := console=null vmalloc=512M androidboot.console=null user_debug=31
 BOARD_KERNEL_BASE := 0x10000000
@@ -77,33 +78,33 @@ BOARD_KERNEL_PAGESIZE := 2048
 #BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02900000 --tags_offset 0x02700000
 
 # Battery
-\
-BOARD_BATTERY_DEVICE_NAME := battery
+BOARD_CHARGER_ENABLE_SUSPEND := true
+BOARD_CHARGER_SHOW_PERCENTAGE := true
+BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
+RED_LED_PATH := "/sys/class/leds/led_r/brightness"
+GREEN_LED_PATH := "/sys/class/leds/led_g/brightness"
+BLUE_LED_PATH := "/sys/class/leds/led_b/brightness"
+BACKLIGHT_PATH := "/sys/class/backlight/panel/brightness"
+CHARGING_ENABLED_PATH := "/sys/class/power_supply/battery/batt_lp_charging"
 
 # FIMG2D
 BOARD_USES_SKIA_FIMGAPI := true
 BOARD_USES_NEON_BLITANTIH := true
 
 # GSC
-# BOARD_USES_ONLY_GSC0_GSC1 := true
+BOARD_USES_ONLY_GSC0_GSC1 := true
 
 # HDMI
-# BOARD_USES_GSC_VIDEO := true
-# BOARD_USES_CEC := true
+BOARD_USES_GSC_VIDEO := true
+BOARD_USES_CEC := true
 
 # Graphics
 USE_OPENGL_RENDERER := true
-# not found in any .mk
-# BOARD_USES_HGL := true
 BOARD_EGL_CFG := $(LOCAL_PATH)/configs/egl.cfg
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 5
-# 0 is by default
-# VSYNC_EVENT_PHASE_OFFSET_NS := 0
-#OVERRIDE_RS_DRIVER := libRSDriverArm.so
 
 # HWCServices
 BOARD_USES_HWC_SERVICES := true
-#TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
 
 # Include path
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
@@ -112,7 +113,7 @@ TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 TARGET_NR_SVC_SUPP_GIDS := 20
 
 # SurfaceFlinger
-BOARD_USES_SYNC_MODE_FOR_MEDIA := true
+# BOARD_USES_SYNC_MODE_FOR_MEDIA := true
 
 # NFC
 BOARD_HAVE_NFC := true
@@ -138,7 +139,7 @@ BOARD_USE_ENCODER_RGBINPUT_SUPPORT := true
 BOARD_USE_DUALDPB_MODE := true
 
 # Samsung Gralloc
-# TARGET_SAMSUNG_GRALLOC_EXTERNAL_USECASES := true
+TARGET_SAMSUNG_GRALLOC_EXTERNAL_USECASES := true
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 11534336
