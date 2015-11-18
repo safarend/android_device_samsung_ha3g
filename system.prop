@@ -30,3 +30,6 @@ persist.sys.usb.config=mtp,adb
 # Wifi
 wifi.interface=wlan0
 wlan.wfd.hdcp=disable
+
+#battery
+pm.sleep_mode=1
