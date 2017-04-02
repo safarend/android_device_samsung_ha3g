@@ -8,7 +8,7 @@ $(call inherit-product, vendor/cm/config/nfc_enhanced.mk)
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
 ## Device identifier. This must come after all inclusions
-PRODUCT_NAME := cm_ha3g
+PRODUCT_NAME := lineage_ha3g
 PRODUCT_DEVICE := ha3g
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
